@@ -11,27 +11,40 @@ pool:
 
 variables:
   buildConfiguration: 'Release'
+  solutionPath: 'All.sln'
 
 steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
     useGlobalJson: true
+  displayName: 'Install .NET Core SDK with global.json file'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
     feedsToUse: 'select'
+    projects: '$(solutionPath)'
+  displayName: 'Restore $(solutionPath) NuGet packages'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
     arguments: '-c $(buildConfiguration) --no-restore'
+    projects: '$(solutionPath)'
+  displayName: 'Build $(solutionPath)'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'test'
     projects: 'tests/**/*.csproj'
+  displayName: 'Run All tests'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: true
-    arguments: '-c $(buildConfiguration) --no-build'
+    arguments: '-c $(buildConfiguration) --no-build -o $(Build.ArtifactStagingDirectory)'
+  displayName: 'Publish web project'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'bin'
+    publishLocation: 'Container'
