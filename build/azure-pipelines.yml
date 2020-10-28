@@ -19,6 +19,9 @@ steps:
     packageType: 'sdk'
     useGlobalJson: true
   displayName: 'Install .NET Core SDK with global.json file'
+- task: DockerInstaller@0
+  inputs:
+    dockerVersion: '17.09.0-ce'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'restore'
@@ -41,6 +44,7 @@ steps:
     command: 'publish'
     publishWebProjects: true
     arguments: '-c $(buildConfiguration) --no-build -o $(Build.ArtifactStagingDirectory)'
+    zipAfterPublish: false
   displayName: 'Publish web project'
 
 - task: PublishBuildArtifacts@1
