@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
+    <DockerfilePath>$(RepoRoot)build/Dockerfile</DockerfilePath>
+  </PropertyGroup>
+  <ItemGroup Condition="$(UsingMicrosoftNETSdkWeb)">
+    <Content Include="$(DockerfilePath)">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+</Project>

@@ -6,6 +6,7 @@ using AspNetCoreApp.Application;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,7 @@ namespace AspNetCoreApp
             {
                 options.UseSqlite(Configuration.GetConnectionString("Sqlite"));
             });
+            //services.AddIdentity<IdentityUser>
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
