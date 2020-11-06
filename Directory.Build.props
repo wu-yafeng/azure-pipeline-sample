@@ -4,7 +4,7 @@
     <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
     <DockerfilePath>$(RepoRoot)build/Dockerfile</DockerfilePath>
   </PropertyGroup>
-  <ItemGroup Condition="$(UsingMicrosoftNETSdkWeb)">
+  <ItemGroup Condition="$(UsingMicrosoftNETSdkWeb) != '' AND $(UsingMicrosoftNETSdkWeb)">
     <Content Include="$(DockerfilePath)">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
