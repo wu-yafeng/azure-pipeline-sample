@@ -46,7 +46,10 @@ steps:
     arguments: '-c $(buildConfiguration) --no-build -o $(Build.ArtifactStagingDirectory)'
     zipAfterPublish: false
   displayName: 'Publish web project'
-
+- task: Docker@2
+  inputs:
+    command: 'build'
+    Dockerfile: '**/Dockerfile'
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
