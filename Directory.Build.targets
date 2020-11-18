@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <Target Name="ContainerVerifyDockerInstallation">
+    <Exec Command="docker --version" EchoOff="true" IgnoreExitCode="true">
+      <Output PropertyName="_ExitCode" TaskParameter="ExitCode" />
+    </Exec>
+    <ContainerError Condition="$(_ExitCode) != 0" ErrorName="ErrorDockerNotInstalled" />
+  </Target>
+</Project>

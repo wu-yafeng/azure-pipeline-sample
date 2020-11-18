@@ -3,6 +3,8 @@
   <PropertyGroup>
     <RepoRoot>$(MSBuildThisFileDirectory)</RepoRoot>
     <DockerfilePath>$(RepoRoot)build/Dockerfile</DockerfilePath>
+    <DefaultNetCoreTargetFramework>net5.0</DefaultNetCoreTargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup Condition="$(UsingMicrosoftNETSdkWeb) != '' AND $(UsingMicrosoftNETSdkWeb)">
     <Content Include="$(DockerfilePath)">
